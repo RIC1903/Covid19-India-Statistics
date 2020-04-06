@@ -14,6 +14,10 @@
     <!-- Google Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Archia" rel="stylesheet">
     
+    <!-- Chartist CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
     <!-- Main CSS Stylesheet   -->
     <link href='src/css/style.css' rel='stylesheet'>
     
@@ -23,7 +27,7 @@
 
     <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand ml-5" href="#"><img src='src/assets/images/corona-icon.png' alt='Covid19 India Statistics'></a>
+            <a class="navbar-brand ml-4" href="#"><img src='src/assets/images/corona-icon.png' alt='Covid19 India Statistics'></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -53,7 +57,23 @@
 >
     <!-- Main Content -->
         <div class='container'>
-    
+          <div class='trends mb-3'>
+            <h4>COVID19 TRENDS</h4>
+            <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-cummulative-tab" data-toggle="pill" href="#pills-cummulative" role="tab" aria-controls="pills-cummulative" aria-selected="true">Cummulative</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-daily-tab" data-toggle="pill" href="#pills-daily" role="tab" aria-controls="pills-daily" aria-selected="false">Daily</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active chart1" id="pills-cummulative" role="tabpanel" aria-labelledby="pills-cummulative-tab">
+                <div class="ct-chart ct-major-tenth"></div>
+              </div>
+              <div class="tab-pane fade" id="pills-daily" role="tabpanel" aria-labelledby="pills-daily-tab">Daily Graph</div>
+            </div>
+          </div>
         </div>
     <!-- End of Main Content -->
     
@@ -70,7 +90,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     
     <!-- Main JS Script -->
-    <script src='./src/scripts/script.js'></script>
+    <script src='./src/js//script.js'></script>
     
 </body>
 </html>

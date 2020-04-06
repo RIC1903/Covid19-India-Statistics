@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family:Archia, Moon, Moon-Bold, sans-serif;
+  font-family:Archia, sans-serif;
   background-color: #eee;
   text-transform: uppercase;
   background-color: white;
@@ -26,13 +26,14 @@ body {
 }
 .navbar-brand img{
     margin-right: 10%;
-    max-height: 45px;
-    max-width: 45px;
+    max-height: 30px;
+    max-width: 30px;
 }
 
 .nav-item{
-    font-family: Moon-Bold;
-    font-size: 16px;
+    font-family: Archia;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 /*---- Banner ----*/
@@ -40,8 +41,30 @@ body {
    background: rgba(32,26,162,.12549) !important;
     color: rgba(32,26,162,.866667) !important;
     text-transform: none;   
-/*    letter-spacing: 1px;*/
     font-size: 13px;
     text-align: center;
     font-weight: bold;
+    border: none;
+}
+
+/*---- Trends ----*/
+
+.trends{
+    border: 1.5px groove rgba(0, 0, 0, 0.116);
+    padding: 2% 3% 2% 3%;
+}
+.trends h4{
+    font-weight: bold;
+}
+
+.trends a{
+    font-size: 13px;
+}
+
+.nav-item{
+    margin-right: 1%;
+}
+
+.ct-label {
+    font-size: 10px;
 }

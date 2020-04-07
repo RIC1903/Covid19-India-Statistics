@@ -2,35 +2,23 @@
 //fetching data from covid19india api
 var i;
 var xmlhttp = new XMLHttpRequest();
-var url = "https://api.covid19india.org/raw_data.json";
+var url = "https://api.covid19india.org/data.json";
 
 xmlhttp.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
-        var data = JSON.parse(this.responseText).raw_data;
+        var data = JSON.parse(this.responseText);
         var date = []; //dates of the cases found
-	var num_of_cases = new Array(2); //2d aray with date,no.of.cases
-        for (i=0;i<data.length;i++){
-            if (date.indexOf(data[i].dateannounced) == -1){
-                date.push(data[i].dateannounced);
-            }
+        var case_obj=[];
+
+        //looping across case_time_series
+        for(i=0;i<data.cases_time_series.length;i++){
+            var obj={"meta":data.cases_time_series[i].date, "value":data.cases_time_series[i].totalconfirmed};
+            case_obj.push(obj);
+            date.push(data.cases_time_series[i].date);
         }
-        // console.log(date);
-        
-        for (i=0;i<date.length; i++){
-            num_of_cases[i] = new Array(2);
-            num_of_cases[i][0]=date[i];
-            num_of_cases[i][1]=0;
-        }
-        
-        for (i=0;i<data.length;i++){
-            var j = date.indexOf(data[i].dateannounced);
-            for (var x = j; x<date.length; x++){
-            num_of_cases[x][1]+=1;
-            }
-        }
-        console.log(num_of_cases)
+        console.log(case_obj)
         //chart for cases vs days
-        renderLineChart(date,num_of_cases[1])
+        renderLineChart(date,case_obj)
     }
 }
 
@@ -47,19 +35,23 @@ function renderLineChart(label,data){
     }
 
     var options = {
+        height: '80%',
         low:0,
         showArea: true,
+        plugins: [
+            Chartist.plugins.tooltip()
+          ],
         axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 8 === 0 ? '' + value : null;
+              return index % 7 === 0 ? '' + value : null;
             }
           }
     }
     var responsiveOptions = [
-        ['screen and (min-width: 640px)', {
+        ['screen and (max-width: 640px)', {
           axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 4 === 0 ? '' + value : null;
+              return index % 14 === 0 ? '' + value : null;
             }
           }
         }]

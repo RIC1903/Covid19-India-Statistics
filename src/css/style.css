@@ -99,15 +99,22 @@ body {
     font-weight: 200;
     margin-left: 1%;
 }
+
 .ct-label {
     font-size: 10px;
 }
-
 .ct-line{
     stroke-width: 2px;
 }
+.ct-bar{
+    stroke-width: 2px;
+}
+
 .ct-point{
     stroke-width: 5px;
-}
+}  
+.ct-slice-pie{
+    stroke-width: 5px;
+} 
 /* ----------------------------------------------------------------- */
 /* ----------------------------------------------------------------- */

@@ -1,4 +1,11 @@
-//Main Script file for handling data fetching and chart generation
+//------------------------------------------------------------------------------------------------------------------------------------------------//
+//------------------------------------------Main Script file for handling data fetching and chart generation--------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------//
+
+//-------------------------------------//
+//------------DATA FETCH--------------//
+//-----------------------------------//
+
 //fetching data from covid19india api
 var i;
 var xmlhttp = new XMLHttpRequest();
@@ -8,24 +15,46 @@ xmlhttp.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
         var data = JSON.parse(this.responseText);
         var date = []; //dates of the cases found
-        var case_obj=[];
+        var case_obj=[];//array of objects of date and cases (cummulative);
+        var daily_conf =[];//daily conf cases;
 
         //looping across case_time_series
         for(i=0;i<data.cases_time_series.length;i++){
-            var obj={"meta":data.cases_time_series[i].date, "value":data.cases_time_series[i].totalconfirmed};
-            case_obj.push(obj);
             date.push(data.cases_time_series[i].date);
+            case_obj.push({"meta":date[i], "value":data.cases_time_series[i].totalconfirmed});
+            daily_conf.push({"meta":date[i], "value":parseInt(data.cases_time_series[i].dailyconfirmed)});
         }
-        console.log(case_obj)
+
         //chart for cases vs days
+        if(date.length !=0 && case_obj.length !=0 && daily_conf.length!=0){
         renderLineChart(date,case_obj)
+        renderBarChartPeak(date,daily_conf);
+        }
+        console.log(daily_conf);
+        //chart caption
+        loadCaption(data);
     }
 }
 
 xmlhttp.open("GET", url, true);
 xmlhttp.send();
+//------------END OF DATA FETCH--------------//
+//------------------------------------------//
 
-//chart functions for above data
+//--------------------------------------------//
+//--------------CHART CAPTIONS---------------//
+//------------------------------------------//
+
+function loadCaption(data) {
+    document.getElementById('conf-date').innerText=data.statewise[0].lastupdatedtime;
+    document.getElementById('conf-value').innerText=data.statewise[0].confirmed+' cases';
+}
+
+//------------------------------------//
+//--------------CHARTS---------------//
+//----------------------------------//
+
+//chart functions for line chart
 function renderLineChart(label,data){
     var chartData = {
         labels: label,
@@ -56,7 +85,7 @@ function renderLineChart(label,data){
           }
         }]
       ];
-    var chart = new Chartist.Line('.ct-chart', chartData, options, responsiveOptions);
+    var chart = new Chartist.Line('#ct-chart-conf-cumm', chartData, options, responsiveOptions);
     
     // Let's put a sequence number aside so we can use it in the event callbacks
     var seq = 0,
@@ -173,3 +202,42 @@ function renderLineChart(label,data){
         // window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 5000);
     });
 }
+
+//chart function for bar chart with peak points
+// Create a simple bi-polar bar chart
+
+function renderBarChartPeak(label,data){
+    var chart = new Chartist.Bar('#ct-chart-conf-daily', {
+        labels: label,
+        series: [
+            data
+        ]
+      }, {
+        height: '80%',
+        low:0,
+        plugins: [
+            Chartist.plugins.tooltip()
+          ],
+        axisX: {
+            labelInterpolationFnc: function(value, index) {
+              return index % 7 === 0 ? '' + value : null;
+            }
+          }
+      });
+      
+      // Listen for draw events on the bar chart
+      chart.on('draw', function(data) {
+        // If this draw event is of type bar we can use the data to create additional content
+        if(data.type === 'bar') {
+          // We use the group element of the current series to append a simple circle with the bar peek coordinates and a circle radius that is depending on the value
+          data.group.append(new Chartist.Svg('circle', {
+            cx: data.x2,
+            cy: data.y2,
+            r: Math.abs(Chartist.getMultiValue(2)) * 1.5
+          }, 'ct-slice-pie'));
+        }
+      });
+      
+}
+//-------------------------------------------//
+//--------------END OF CHARTS---------------//

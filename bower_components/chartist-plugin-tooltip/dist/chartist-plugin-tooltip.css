@@ -6,9 +6,9 @@
   padding: .5em;
   background: #d702057a;
   color: rgba(0,0,0,0.6);
-  font-family: Oxygen,Helvetica,Arial,sans-serif;
-  font-weight: 700;
+  font-family: Archia,sans-serif;
   text-align: center;
+  font-size: 12px;
   pointer-events: none;
   z-index: 1;
   -webkit-transition: opacity .2s linear;

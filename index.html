@@ -58,7 +58,7 @@
     <!-- End of Banner --
 >
     <!-- Main Content -->
-        <div class='container'>
+        <div class='container-fluid'>
           <div class='trends mb-3'>
             <h4>COVID19 TRENDS</h4>
             <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
@@ -71,23 +71,78 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade active show" id="pills-cummulative" role="tabpanel" aria-labelledby="pills-cummulative-tab">
+                <div class='row'>
+                <div class="col-sm confirmed">
                 <h6>CONFIRMED</h6>
-                <h7 id='conf-date'>07/04/2020 21:53:25</h7>
+                <h7 id='cumm-conf-date'></h7>
                 
-                <h6 id='conf-value'>5337 cases</h6>
+                <h6 id='cumm-conf-value'></h6>
                 
                 <div class="ct-chart ct-major-tenth mt-3" id="ct-chart-conf-cumm"></div>
-                <br>
+                </div>
+                <div class='col-sm deceased'>
+                  <h6>DECEASED</h6>
+                  <h7 id='cumm-dead-date'></h7>
+                  <h6 id='cumm-dead-value'></h6>
+
+                  <div class="ct-chart ct-major-tenth mt-3" id='ct-chart-dead-cumm'></div>
+                </div>
+                
+               </div>
+               <div class='row show'>
+                <div class='col-sm recovered'>
+                  <h6>RECOVERED</h6>
+                  <h7 id='cumm-recov-date'></h7>
+                  <h6 id='cumm-recov-value'></h6>
+
+                  <div class='ct-chart ct-major-tenth mt-3 show active' id='ct-chart-recov-cumm'></div>
+                </div>
+                <div class='col-sm active-case'>
+                  <h6>ACTIVE</h6>
+                  <h7 id='cumm-active-date'></h7>
+                  <h6 id='cumm-active-value'></h6>
+
+                  <div class='ct-chart ct-major-tenth mt-3 show active' id='ct-chart-active-cumm'></div>
+                </div>
+               </div>
                 
                 
               </div>
 
               <div class="tab-pane fade active" id="pills-daily" role="tabpanel" aria-labelledby="pills-daily-tab">
+                <div class='row'>
+                <div class='col-sm confirmed'>
                 <h6>CONFIRMED</h6>
-
+                <h7 id='daily-conf-date'></h7>
+                <h6 id='daily-conf-value'></h6>
                 
                 <div class="ct-chart ct-major-tenth mt-3" id="ct-chart-conf-daily"></div>
               </div>
+              <div class='col-sm deceased'>
+
+                <h6>DECEASED</h6>
+                <h7 id='daily-dead-date'></h7>
+                <h6 id='daily-dead-value'></h6>
+                <div class="ct-chart ct-major-tenth mt-3" id='ct-chart-dead-daily'></div>
+              </div>
+              </div>
+              <div class='row'>
+                <div class='col-sm recovered'>
+                  <h6>RECOVERED</h6>
+                  <h7 id='daily-recov-date'></h7>
+                  <h6 id='daily-recov-value'></h6>
+                  <div class='ct-chart ct-major-tenth mt-3' id='ct-chart-recov-daily'>
+                </div>
+              </div>
+              <div class='col-sm active-case'>
+                
+                  <h6>ACTIVE</h6>
+                  <h7 id='daily-active-date'></h7>
+                  <h6 id='daily-active-value'></h6>
+
+                <div class='ct-chart ct-major-tenth mt-3 show active' id='ct-chart-active-daily'></div>
+              
+            </div>
             </div>
           </div>
         </div>

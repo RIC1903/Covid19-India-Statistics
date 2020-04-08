@@ -15,22 +15,39 @@ xmlhttp.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
         var data = JSON.parse(this.responseText);
         var date = []; //dates of the cases found
-        var case_obj=[];//array of objects of date and cases (cummulative);
-        var daily_conf =[];//daily conf cases;
+        var cumm_conf=[];//cummulative conf cases
+        var cumm_dead=[];//cummulative deaths
+        var cumm_recov=[];//cummulaitve recovery
+        var cumm_active=[];//cummulative active
+        var daily_conf =[];//daily conf cases
+        var daily_dead =[];//daily deaths
+        var daily_recov=[];//daily recovery
+        var daily_active=[];//daily active
 
         //looping across case_time_series
         for(i=0;i<data.cases_time_series.length;i++){
             date.push(data.cases_time_series[i].date);
-            case_obj.push({"meta":date[i], "value":data.cases_time_series[i].totalconfirmed});
-            daily_conf.push({"meta":date[i], "value":parseInt(data.cases_time_series[i].dailyconfirmed)});
+            cumm_conf.push({"meta":date[i], "value":data.cases_time_series[i].totalconfirmed});
+            cumm_dead.push({"meta":date[i], "value":data.cases_time_series[i].totaldeceased});
+            cumm_recov.push({"meta":date[i], "value":data.cases_time_series[i].totalrecovered});
+            cumm_active.push({"meta":date[i], "value":cumm_conf[i].value-cumm_dead[i].value-cumm_recov[i].value});
+            daily_conf.push({"meta":date[i], "value":data.cases_time_series[i].dailyconfirmed});
+            daily_dead.push({"meta":date[i], "value":data.cases_time_series[i].dailydeceased});
+            daily_recov.push({"meta":date[i],"value":data.cases_time_series[i].dailyrecovered});
+            daily_active.push({"meta":date[i], "value":parseInt(daily_conf[i].value)-parseInt(daily_dead[i].value)-parseInt(daily_recov[i].value)});
         }
 
         //chart for cases vs days
-        if(date.length !=0 && case_obj.length !=0 && daily_conf.length!=0){
-        renderLineChart(date,case_obj)
-        renderBarChartPeak(date,daily_conf);
-        }
-        console.log(daily_conf);
+        
+        renderLineChart(date,cumm_conf,'#ct-chart-conf-cumm');//cumm conf graph 
+        renderLineChart(date,cumm_dead,'#ct-chart-dead-cumm');//cumm dead      
+        renderLineChart(date,cumm_recov,'#ct-chart-recov-cumm');//cumm recov
+        renderLineChart(date,cumm_active,'#ct-chart-active-cumm');//cumm active
+
+        renderBarChartPeak(date,daily_conf,'#ct-chart-conf-daily');//daily conf graph
+        renderBarChartPeak(date,daily_dead,'#ct-chart-dead-daily');//daily dead
+        renderBarChartPeak(date,daily_recov,'#ct-chart-recov-daily');//daily recov
+        renderBarChartPeak(date,daily_active,'#ct-chart-active-daily');//cumm active
         //chart caption
         loadCaption(data);
     }
@@ -46,8 +63,25 @@ xmlhttp.send();
 //------------------------------------------//
 
 function loadCaption(data) {
-    document.getElementById('conf-date').innerText=data.statewise[0].lastupdatedtime;
-    document.getElementById('conf-value').innerText=data.statewise[0].confirmed+' cases';
+    document.getElementById('cumm-conf-date').innerText=data.statewise[0].lastupdatedtime;
+    document.getElementById('cumm-conf-value').innerText=data.statewise[0].confirmed+' cases';
+    document.getElementById('cumm-dead-date').innerText=data.statewise[0].lastupdatedtime;
+    document.getElementById('cumm-dead-value').innerText=data.statewise[0].deaths+' deaths';
+    document.getElementById('cumm-recov-date').innerText=data.statewise[0].lastupdatedtime;
+    document.getElementById('cumm-recov-value').innerText=data.statewise[0].recovered+' recovered';
+    document.getElementById('cumm-active-date').innerText=data.statewise[0].lastupdatedtime;
+    document.getElementById('cumm-active-value').innerText=data.statewise[0].active+' active';
+
+    document.getElementById('daily-conf-date').innerText=data.cases_time_series[data.cases_time_series.length - 1].date;
+    document.getElementById('daily-conf-value').innerText=data.cases_time_series[data.cases_time_series.length - 1].dailyconfirmed + ' cases';
+    document.getElementById('daily-dead-date').innerText=data.cases_time_series[data.cases_time_series.length - 1].date;
+    document.getElementById('daily-dead-value').innerText=data.cases_time_series[data.cases_time_series.length - 1].dailydeceased + ' deaths';
+    document.getElementById('daily-recov-date').innerText=data.cases_time_series[data.cases_time_series.length - 1].date;
+    document.getElementById('daily-recov-value').innerText=data.cases_time_series[data.cases_time_series.length - 1].dailyrecovered + ' recovered';
+    document.getElementById('daily-active-date').innerText=data.cases_time_series[data.cases_time_series.length - 1].date;
+    document.getElementById('daily-active-value').innerText=parseInt(data.cases_time_series[data.cases_time_series.length - 1].dailyconfirmed) - parseInt(data.cases_time_series[data.cases_time_series.length - 1].dailydeceased) - parseInt(data.cases_time_series[data.cases_time_series.length - 1].dailyrecovered);
+    
+    
 }
 
 //------------------------------------//
@@ -55,7 +89,7 @@ function loadCaption(data) {
 //----------------------------------//
 
 //chart functions for line chart
-function renderLineChart(label,data){
+function renderLineChart(label,data,id){
     var chartData = {
         labels: label,
         series: [
@@ -64,7 +98,8 @@ function renderLineChart(label,data){
     }
 
     var options = {
-        height: '80%',
+        height: '100%',
+        width: '100%',
         low:0,
         showArea: true,
         plugins: [
@@ -72,7 +107,8 @@ function renderLineChart(label,data){
           ],
         axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 7 === 0 ? '' + value : null;
+
+              return index % 5 === 0 ? '' + value : null;
             }
           }
     }
@@ -80,12 +116,13 @@ function renderLineChart(label,data){
         ['screen and (max-width: 640px)', {
           axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 14 === 0 ? '' + value : null;
+              return index % 9 === 0 ? '' + value : null;
             }
           }
         }]
       ];
-    var chart = new Chartist.Line('#ct-chart-conf-cumm', chartData, options, responsiveOptions);
+      console.log(id);
+    var chart = new Chartist.Line(id, chartData, options, responsiveOptions);
     
     // Let's put a sequence number aside so we can use it in the event callbacks
     var seq = 0,
@@ -206,8 +243,8 @@ function renderLineChart(label,data){
 //chart function for bar chart with peak points
 // Create a simple bi-polar bar chart
 
-function renderBarChartPeak(label,data){
-    var chart = new Chartist.Bar('#ct-chart-conf-daily', {
+function renderBarChartPeak(label,data,id){
+    var chart = new Chartist.Bar(id, {
         labels: label,
         series: [
             data
@@ -239,5 +276,6 @@ function renderBarChartPeak(label,data){
       });
       
 }
+
+//--------------END OF CHARTS-----------------//
 //-------------------------------------------//
-//--------------END OF CHARTS---------------//

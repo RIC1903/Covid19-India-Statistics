@@ -23,11 +23,33 @@ body {
   background-color: white;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #007bffc5; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #007bff; 
+  }
+
 /* ----------------------------------------------------------------- */
 /* ----------------------------------------------------------------- */
 
 /* ----------------------------------------------------------------- */
-/*--------------------------- Navbar -------------------------------*/
+/* -------------------------- Navbar ------------------------------- */
 /* ----------------------------------------------------------------- */
 .bg-light{
     background-color: white !important;
@@ -60,7 +82,7 @@ body {
 
 
 /* ----------------------------------------------------------------- */
-/*------------------------------- Trends ---------------------------*/
+/*------------------------------- Trends ----------------------------*/
 /* ----------------------------------------------------------------- */
 .trends{
     border: 1.5px groove rgba(0, 0, 0, 0.116);
@@ -81,40 +103,172 @@ body {
 /* ----------------------------------------------------------------- */
 
 /* ----------------------------------------------------------------- */
-/* ------------------------------ Charts ---------------------------- */
+/* ------------------------------ Charts --------------------------- */
 /* ----------------------------------------------------------------- */
 
-#pills-cummulative {
+.confirmed {
+    border-radius: 7px;
     background-color: rgba(226, 72, 72, 0.13);
     padding: 2% 1% 0% 1%;
+    border: 2px solid white;
 }
-#pills-cummulative h6{
+.confirmed h6{
     color: red;
     font-weight: 700;
     margin-left: 1%;
     margin-bottom: 0;
 }
-#pills-cummulative h7{
+.confirmed h7{
     color: red;
     font-weight: 200;
     margin-left: 1%;
 }
 
+.deceased {
+    border-radius: 7px;
+    background-color: rgba(92, 91, 91, 0.096);
+    padding: 2% 1% 0% 1%;
+    border: 2px solid white;
+}
+.deceased h6{
+    color: rgb(5, 5, 5);
+    font-weight: 700;
+    margin-left: 1%;
+    margin-bottom: 0;
+}
+.deceased h7{
+    color: rgb(22, 21, 21);
+    font-weight: 200;
+    margin-left: 1%;
+}
+
+.deceased .ct-line{
+    stroke:black;
+}
+.deceased .ct-bar{
+    stroke: black;
+}
+.deceased .ct-point{
+    stroke:black;
+}
+.deceased .ct-slice-pie{
+    fill: black;
+    
+}
+.deceased .ct-area{
+    fill: black!important;
+}
+
+.deceased .chartist-tooltip{
+    background: rgba(0, 0, 0, 0.39);
+    color: white;
+}
+.deceased .chartist-tooltip:before{
+    border-top-color: rgba(0, 0, 0, 0.39);
+}
+
+.recovered {
+    border-radius: 7px;
+    background-color: rgba(40, 167, 70, 0.24);
+    padding: 2% 1% 0% 1%;
+    border: 2px solid white;
+}
+.recovered h6{
+    color: green;
+    font-weight: 700;
+    margin-left: 1%;
+    margin-bottom: 0;
+}
+.recovered h7{
+    color: green;
+    font-weight: 200;
+    margin-left: 1%;
+}
+
+.recovered .ct-line{
+    stroke:green;
+}
+.recovered .ct-bar{
+    stroke: green;
+}
+.recovered .ct-point{
+    stroke:green;
+}
+.recovered .ct-slice-pie{
+    fill: green;
+    
+}
+.recovered .ct-area{
+    fill: green!important;
+}
+
+.recovered .chartist-tooltip{
+    background: rgba(40, 167, 70, 0.26);
+    color: rgba(0, 0, 0, 0.76);
+}
+.recovered .chartist-tooltip:before{
+    border-top-color: rgba(40, 167, 70, 0.26);
+}
+
+.active-case {
+    border-radius: 7px;
+    background-color: rgba(40, 49, 167, 0.24);
+    padding: 2% 1% 0% 1%;
+    border: 2px solid white;
+}
+.active-case h6{
+    color: blue;
+    font-weight: 700;
+    margin-left: 1%;
+    margin-bottom: 0;
+}
+.active-case h7{
+    color: blue;
+    font-weight: 200;
+    margin-left: 1%;
+}
+
+.active-case .ct-line{
+    stroke:blue;
+}
+.active-case .ct-bar{
+    stroke: blue;
+}
+.active-case .ct-point{
+    stroke:blue;
+}
+.active-case .ct-slice-pie{
+    fill: blue;
+    
+}
+.active-case .ct-area{
+    fill: blue!important;
+}
+
+.active-case .chartist-tooltip{
+    background: rgba(40, 49, 167, 0.26);
+    color: rgba(0, 0, 0, 0.76);
+}
+.active-case .chartist-tooltip:before{
+    border-top-color: rgba(40, 49, 167, 0.26);
+}
+
 .ct-label {
-    font-size: 10px;
+    font-size: 10px!important;
 }
 .ct-line{
-    stroke-width: 2px;
+    stroke-width: 2px!important;
 }
 .ct-bar{
-    stroke-width: 2px;
+    stroke-width: 2px!important;
 }
 
 .ct-point{
-    stroke-width: 5px;
+    stroke-width: 5px!important;
 }  
 .ct-slice-pie{
-    stroke-width: 5px;
+    stroke-width: 5px!important;
 } 
+
 /* ----------------------------------------------------------------- */
 /* ----------------------------------------------------------------- */

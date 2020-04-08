@@ -24,15 +24,25 @@ xmlhttp.onreadystatechange = function(){
             case_obj.push({"meta":date[i], "value":data.cases_time_series[i].totalconfirmed});
             daily_conf.push({"meta":date[i], "value":parseInt(data.cases_time_series[i].dailyconfirmed)});
         }
-
+        // console.log(case_obj)
         //chart for cases vs days
         if(date.length !=0 && case_obj.length !=0 && daily_conf.length!=0){
         renderLineChart(date,case_obj)
         renderBarChartPeak(date,daily_conf);
         }
-        console.log(daily_conf);
+        // console.log(daily_conf);
         //chart caption
         loadCaption(data);
+
+        //----------- Creating Statewise Object--------------//
+        // console.log(data.statewise)
+        var state = [[]]; //Object with keys as state and values as the array of active,recovered,confirmed and deceased
+        for(i=0;i<data.statewise.length-1;i++)
+        {
+          state.push({"state":data.statewise[i].state,"confirmed":data.statewise[i].confirmed,"active":data.statewise[i].active,"recovered":data.statewise[i].recovered,"deceased":data.statewise[i].deaths});
+        }
+        // console.log(state[2].state)
+        tableformation(state)
     }
 }
 
@@ -241,3 +251,27 @@ function renderBarChartPeak(label,data){
 }
 //-------------------------------------------//
 //--------------END OF CHARTS---------------//
+
+
+//---------------START OF TABLE FORMATION--------------//
+function tableformation(state){
+  // var tbody = document.getElementById('tbody');
+  // for(i=2;i<state.lenght;i++)
+  // {
+  //   var tr = "<tr>";
+  //   tr += "<th>" + state[i].state + "</th>" + "<td>$" + state[i].confirmed + "</td>" + "<td>$" + state[i].active + "</td>" + "<td>$" + state[i].recovered + "</td>" + "<td>$" + state[i].deceased + "</td></tr>";
+  //   tbody.innerHTML += tr;
+  // }
+  var k = '<tbody>'
+    for(i = 2;i < state.length; i++){
+        k+= '<tr>';
+        k+= '<th>' + state[i].state + '</th>';
+        k+= '<td>' + state[i].confirmed + '</td>';
+        k+= '<td>' + state[i].active + '</td>';
+        k+= '<td>' + state[i].recovered + '</td>';
+        k+= '<td>' + state[i].deceased + '</td>';
+        k+= '</tr>';
+    }
+    k+='</tbody>';
+    document.getElementById('tbody').innerHTML = k;
+}

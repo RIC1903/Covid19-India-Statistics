@@ -48,10 +48,8 @@ xmlhttp.onreadystatechange = function(){
         renderBarChartPeak(date,daily_dead,'#ct-chart-dead-daily');//daily dead
         renderBarChartPeak(date,daily_recov,'#ct-chart-recov-daily');//daily recov
         renderBarChartPeak(date,daily_active,'#ct-chart-active-daily');//cumm active
-        if(date.length !=0 && case_obj.length !=0 && daily_conf.length!=0){
-        renderLineChart(date,case_obj)
-        renderBarChartPeak(date,daily_conf);
-        }
+    
+        
         // console.log(daily_conf);
         //chart caption
         loadCaption(data);
@@ -309,7 +307,7 @@ function tableformation(state){
   var k = '<tbody>'
     for(i = 2;i < state.length; i++){
         k+= '<tr>';
-        k+= '<th>' + state[i].state + '</th>';
+        k+= "<th scope='row'>" + state[i].state + '</th>';
         k+= '<td>' + state[i].confirmed + '</td>';
         k+= '<td>' + state[i].active + '</td>';
         k+= '<td>' + state[i].recovered + '</td>';

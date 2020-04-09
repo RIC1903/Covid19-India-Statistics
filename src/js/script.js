@@ -129,7 +129,7 @@ function renderLineChart(label,data,id){
         ['screen and (max-width: 640px)', {
           axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 9 === 0 ? '' + value : null;
+              return index % 12 === 0 ? '' + value : null;
             }
           }
         }]
@@ -144,7 +144,7 @@ function renderLineChart(label,data,id){
     
     // Once the chart is fully created we reset the sequence
     chart.on('created', function() {
-        seq = 0;
+        // seq = 0;
     });
     
     // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
@@ -244,13 +244,13 @@ function renderLineChart(label,data,id){
     });
     
     // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
-    chart.on('created', function() {
-        if(window.__exampleAnimateTimeout) {
-        clearTimeout(window.__exampleAnimateTimeout);
-        window.__exampleAnimateTimeout = null;
-        }
-        // window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 5000);
-    });
+    // chart.on('created', function() {
+    //     if(window.__exampleAnimateTimeout) {
+    //     clearTimeout(window.__exampleAnimateTimeout);
+    //     window.__exampleAnimateTimeout = null;
+    //     }
+    //     // window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 5000);
+    // });
 }
 
 //chart function for bar chart with peak points

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     
     <!-- FontAwesome   -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ab4c095ae4.js" crossorigin="anonymous"></script>
     
     <!-- Google Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Archia" rel="stylesheet">
@@ -53,26 +53,59 @@
     
     <!-- Stay Safe Banner -->
             <div class="banner alert alert-success" role="alert">
-                Help the medical professionals by staying at your home!
+                The best way we can overcome this crisis is by staying at HOME. Stay Home...Save Lives! 
             </div>
     <!-- End of Banner -->
-    <!-- Table -->
+
+   
     <!-- Main Content -->
-        <div class='container-fluid'>
+      <div class='container-fluid'>
+            <!-- Consolidated Stats -->
+    <div class='card-deck consolidated-stats' style="align-content:center;">
+
+    <div class="card text-white bg-danger mb-3" style="width: 100%; text-align: center;">
+      <div class="card-header">CONFIRMED</div>
+      <div class="card-body">
+        <p class="card-text" id='consolidated-stats-conf'></p>
+      </div>
+    </div>
+    <div class="card text-white bg-success mb-3" style="width:100%; text-align: center;">
+      <div class="card-header">RECOVERED</div>
+      <div class="card-body">
+        <p class="card-text" id="consolidated-stats-recov"></p>
+      </div>
+    </div>
+    <div class="card text-white bg-dark mb-3" style="width:100%; text-align: center;">
+      <div class="card-header">DECEASED</div>
+      <div class="card-body">
+        <p class="card-text" id="consolidated-stats-dead"></p>
+      </div>
+    </div>
+    <div class="card text-white bg-primary mb-3" style="width:100%; text-align: center;">
+      <div class="card-header">ACTIVE</div>
+      <div class="card-body">
+        <p class="card-text" id="consolidated-stats-active"></p>
+      </div>
+    </div>
+
+  </div>
+    <!-- End of Consolidated Stats -->
+    <!-- Table -->
     <div class='table-responsive'>
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">State</th>
-          <th scope="col">Confirmed</th>
-          <th scope="col">Active</th>
-          <th scope="col">Recovered</th>
+          <th scope="col" style="color: red;">Confirmed</th>
+          <th scope="col" style="color: #007bff;">Active</th>
+          <th scope="col" style="color: #28a745;">Recovered</th>
           <th scope="col">Deceased</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
     </table>
     </div>
+    <!-- End of Table -->
           <div class='trends mb-3'>
             <h4>COVID19 TRENDS</h4>
             <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
@@ -160,6 +193,21 @@
             </div>
           </div>
           </div>
+          </div>
+          <div class='card-deck pl-5 pr-5'>
+            
+          <div class="card text-white mb-3" style="width:100%; text-align: center;display: flex;background: black;">
+            <a href="https://github.com/RIC1903/Covid19-India-Statistics" style="text-decoration: none; color: white;">
+            <div class="card-body p-0 pb-2 pt-2">
+              <i class="fab fa-github mb-0" style="font-size: 30px;"></i><p class="card-text" style="font-size:small;">SOURCE CODE</p>
+            
+            </div>
+          </a>
+          </div>
+
+        </div>
+          </div>
+          
     <!-- End of Main Content -->
     
     

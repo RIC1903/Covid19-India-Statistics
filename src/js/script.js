@@ -53,7 +53,12 @@ xmlhttp.onreadystatechange = function(){
         // console.log(daily_conf);
         //chart caption
         loadCaption(data);
-
+        //update consolidate stats
+        console.log(data.statewise[0].confirmed);
+        document.getElementById('consolidated-stats-conf').innerText=data.statewise[0].confirmed;
+        document.getElementById('consolidated-stats-recov').innerText=data.statewise[0].recovered;
+        document.getElementById('consolidated-stats-dead').innerText=data.statewise[0].deaths;
+        document.getElementById('consolidated-stats-active').innerText=data.statewise[0].active;
         //----------- Creating Statewise Object--------------//
         // console.log(data.statewise)
         var state = [[]]; //Object with keys as state and values as the array of active,recovered,confirmed and deceased
